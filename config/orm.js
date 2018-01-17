@@ -58,8 +58,18 @@ var orm = {
         });
     },
     // Insert into table function
-    insertOne: function(table,cb){
+    insertOne: function(table, objColVals, condition, cb){
+        var queryString = "INSERT INTO " + table;
+            queryString += " (" + objToSql(objColVals) + ") ";
+            queryString += "VALUES (" + condition + ")";
         
+        connection.query(queryString, function(err, results){
+            if (err) {
+                throw err;
+            } else {
+                cb(results);
+            }
+        });
     },
     // Update line-item function
     updateOne: function(table, objColVals, conditions, cb) {
