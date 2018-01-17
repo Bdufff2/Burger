@@ -10,8 +10,8 @@
 </ul>
 <h2>Devoured</h2>
 <ul>
-  {{#each cats}}
-    {{#if sleepy}}
+  {{#each burgers}}
+    {{#if devoured}}
       {{!-- {{> burgers/burger-block devoured=false}} --}}
     {{/if}}
   {{/each}}
@@ -24,5 +24,5 @@
     <input type="text" id="burg" name="name">
   </div>
 
-  <button type="submit">Make Burger</button>
+  <button type="submit">Make a Burger</button>
 </form>
