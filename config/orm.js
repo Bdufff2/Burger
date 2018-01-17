@@ -43,29 +43,10 @@ function printQuestionMarks(num) {
 // ====================================================================
 // create orm connections
 var orm = {
-    // Insert into table function
-    create: function(table, cols, vals, cb){
-         // SQL CREATE function: "INSERT INTO table (cols) VALUES (vals.length);"
-        var queryString = "INSERT INTO " + table;
-            queryString += " (";
-            queryString += cols.toString();
-            queryString += ") ";
-            queryString += "VALUES (";
-            queryString += printQuestionMarks(vals.length);
-            queryString += ")";
-
-        console.log(queryString);
-
-        connection.query(queryString, vals, function(err, results){
-            if (err) {
-                throw err;
-            } else {
-                cb(result);
-            }
-        });
-    },
+    
+    
     // Display table info function
-    read: function(table, cb) {
+    selectAll: function(table, cb) {
         // SQL SELECT all statement: "SELECT * FROM table;"
         var queryString = "SELECT * FROM " + table + ";";
         connection.query(queryString, function(err, results) {
@@ -76,8 +57,12 @@ var orm = {
             }
         });
     },
+    // Insert into table function
+    insertOne: function(table,cb){
+        
+    },
     // Update line-item function
-    update: function(table, objColVals, conditions, cb) {
+    updateOne: function(table, objColVals, conditions, cb) {
         // SQL UPDATE function: "UPDATE table SET objColVals WHERE conditions"
         var queryString = "UPDATE " + table;
             queryString += " SET ";
@@ -92,17 +77,6 @@ var orm = {
                 cb(results);
             }
         });
-    },
-    delete: function(table, conditions, cb) {
-        // SQL DELETE function: "DELETE FROM table WHERE conditions"
-        var queryString = "DELETE FROM " + table;
-            queryString += " WHERE ";
-            queryString += conditions;
-        if (err) {
-            throw err;
-        } else {
-            cb(results);
-        }
     }
 };
 
