@@ -1,7 +1,7 @@
 // Setup dependencies
 var express = require('express');
 var bodyParser = require('body-parser');
-var exphbs = require('express-handlebars');
+
 
 var routes = require('./controllers/burgers_controller.js')
 
@@ -11,6 +11,8 @@ var app = express();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+var exphbs = require('express-handlebars');
 
 // Setup handlebars
 app.engine('handlebars', exphbs({ defaultlayout: "main" }));
