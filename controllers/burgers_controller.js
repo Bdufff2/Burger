@@ -8,9 +8,18 @@ var burger = require("../models/burger.js");
 
 // Creating routes
 // =====================================================================
+router.get("/", function (req, res) {
+  burger.selectAll(function (data) {
+    var hbsObject = {
+      burgers: data
+    };
+    console.log(hbsObject);
+    res.render("index", hbsObject);
+  });
+});
 
 // Setup index display with all burgers
-router.get("/", function(req, res) {
+router.get("/api/burgers", function(req, res) {
   burger.selectAll(function (data) {
     var hbsObject = {
       burgers: data
@@ -23,13 +32,13 @@ router.get("/", function(req, res) {
 // Devour a burger
 router.put("/api/burgers/:id", function(req, res) {
   var condition = "id = " + req.params.id;
-
+ console.log("condition", condition);
   burger.updateOne({
     devoured: req.body.devoured
   }, condition, function (data) {
     devoured: true
   }, condition, function (data) {
-    res.redirect('/');
+    res.redirect('/burgers');
   });
 });
 
@@ -39,8 +48,8 @@ router.post("/api/burgers", function(req, res) {
     "burger_name"
   ], [
       req.body.burger_name
-    ], function (data) {
-      res.json({ id: data.insertId });
+    ], function () {
+      res.redirect('/burgers');
     });
 });
 

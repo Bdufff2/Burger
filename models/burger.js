@@ -6,8 +6,10 @@ var burger = {
             cb(res);
         });
     },
-    insertOne: function(objColVals, condition, cb) {
-        orm.insertOne("burgers", objColVals, condition, function(res){
+    insertOne: function(cols, vals, cb) {
+        console.log(cols);
+        console.log(vals);
+        orm.insertOne("burgers", cols, vals, function(res){
             cb(res);
         });
     },
